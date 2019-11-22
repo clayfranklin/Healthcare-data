@@ -1,0 +1,16 @@
+sqlite
+sqlalchamey
+python (app.py)
+padas
+RETURN JSON
+
+RETURN JSON then connects to
+
+Flask
+HTML
+JS
+Plotly
+
+RETURN is where stack breaks.  Return JSON to 
+JS and FLASK
+
