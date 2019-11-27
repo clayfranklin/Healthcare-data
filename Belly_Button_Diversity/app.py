@@ -34,6 +34,7 @@ Samples = Base.classes.samples
 @app.route("/")
 def index():
     """Return the homepage."""
+    
     return render_template("index.html")
 
 
@@ -98,7 +99,17 @@ def samples(sample):
         "sample_values": sample_data[sample].values.tolist(),
         "otu_labels": sample_data.otu_label.tolist(),
     }
+
+    
     return jsonify(data)
+     
+    trace = {
+        "x": df["out_ids"].values.tolist(),
+        "y": df["sample_values"].values.tolist(),
+        "type": "pie"
+    }
+    return jsonify(trace)
+    
 
 
 if __name__ == "__main__":
