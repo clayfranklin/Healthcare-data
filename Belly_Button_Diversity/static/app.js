@@ -1,7 +1,17 @@
 function buildMetadata(sample) {
 
   // @TODO: Complete the following function that builds the metadata panel
+  const url = "/metadata/" + sample;
+  let selector = d3.select("#sample-metadata");
+  selector.html("");
+  d3.json(url).then((metadata) => {
+    Object.entries(metadata).forEach(([key, value]) => {
+      selector.append("h6")
+        .text(key + ": " + value);
 
+    });
+  });
+}
   // Use `d3.json` to fetch the metadata for a sample
     // Use d3 to select the panel with id of `#sample-metadata`
 
@@ -13,19 +23,50 @@ function buildMetadata(sample) {
 
     // BONUS: Build the Gauge Chart
     // buildGauge(data.WFREQ);
-}
+
 
 function buildCharts(sample) {
 
   // @TODO: Use `d3.json` to fetch the sample data for the plots
 
-    // @TODO: Build a Bubble Chart using the sample data
 
-    // @TODO: Build a Pie Chart
-    // HINT: You will need to use slice() to grab the top 10 sample_values,
-    // otu_ids, and labels (10 each).
+  const url = "/samples/" + sample;
+  d3.json(url).then((samples) => {
+    
+    console.log("data: ", samples);
+    let otu_ids = samples["otu_ids"];
+    let sample_values = samples["sample_values"];
+    let otu_labels= samples["otu_labels"];    
+
+    let trace1 = {
+      labels : otu_ids.slice(0,10),
+      values : sample_values.slice(0,10),
+      hovertext: otu_labels.slice(0,10),
+      type: "pie"
+    };
+
+    let pie_data = [trace1];
+    Plotly.newPlot("pie", pie_data);
+
+
+    let trace2 = {
+      x: otu_ids,
+      y: sample_values,
+      text: otu_labels,
+      mode: "markers",
+      marker: {
+       size: sample_values,
+       color: otu_ids, 
+       opacity: 0.3
+      }
+  };
+  
+
+  let bubble_data = [trace2];
+  Plotly.newPlot("bubble", bubble_data);
+
+});
 }
-
 function init() {
   // Grab a reference to the dropdown select element
   var selector = d3.select("#selDataset");

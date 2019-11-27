@@ -19,6 +19,7 @@ app = Flask(__name__)
 #################################################
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/bellybutton.sqlite"
+# sqlite:///db/bellybutton.sqlite"
 db = SQLAlchemy(app)
 
 # reflect an existing database into a new model
@@ -45,6 +46,7 @@ def names():
     # Use Pandas to perform the sql query
     stmt = db.session.query(Samples).statement
     df = pd.read_sql_query(stmt, db.session.bind)
+ 
 
     # Return a list of the column names (sample names)
     return jsonify(list(df.columns)[2:])
@@ -103,12 +105,12 @@ def samples(sample):
     
     return jsonify(data)
      
-    trace = {
-        "x": df["out_ids"].values.tolist(),
-        "y": df["sample_values"].values.tolist(),
-        "type": "pie"
-    }
-    return jsonify(trace)
+    # trace = {
+    #     "x": df["out_ids"].values.tolist(),
+    #     "y": df["sample_values"].values.tolist(),
+    #     "type": "pie"
+    # }
+    # return jsonify(trace)
     
 
 
