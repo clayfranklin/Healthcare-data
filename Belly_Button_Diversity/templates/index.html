@@ -19,17 +19,13 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-2">
-        <div class="well">
-          <h5>SELECT Sample:</h5>
-          <select id="selDataset" onchange="optionChanged(this.value)"></select>
-        </div>
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Sample MetaData</h3>
-          </div>
-          <div id="sample-metadata" class="panel-body"></div>
-        </div>
+      <div class="col-md-18">
+        <div id="bar"></div>
+    <select id="selDataset" onchange="getData(this.value)">
+        <option value="emoji_char">USA</option>
+        <option value="emoji_id">CANADA</option>
+        <option value="emoji_name">CHE</option>
+    </select>
       </div>
       <div class="col-md-5">
         <div id="pie"></div>
@@ -54,4 +50,3 @@
 </body>
 
 </html>
-s
